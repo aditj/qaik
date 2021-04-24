@@ -49,6 +49,18 @@
                 <h2>
                     Trends
                 </h2>
+                <div class="trend-list">
+                    {% for trend in trends %}
+                    <div class="trend">
+                        <p>{{trend.title}}
+                        <sup>
+                            {{trend.count}}
+                        </sup>
+                    </p>
+                </div>
+                    {% endfor %}
+                    
+                </div>
             </div>
             <div id="people">
                 <h2>

@@ -86,3 +86,12 @@ input:focus,textarea:focus{
 .search-bar-container img:hover{
     cursor: pointer;
 }
+.trend-list{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-column-start: 1;
+    grid-column-end: 2;
+}
+sup{
+    font-family: 'DM Mono';
+}
