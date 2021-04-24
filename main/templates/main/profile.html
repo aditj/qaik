@@ -34,34 +34,26 @@
     </div>
     <div class="content">
         <div class="left-half">
-            <div id="compose">
-                <h2>
-                    Compose
-                </h2>
-                <form action="/create_qait" method="POST">
-                    {% csrf_token %}
-                    <input type="text" name="content" maxlength="140" id="new-qait">
-                    <button type="submit" id="new-qait-button" class="black">QAIT</button>
-                </form>
-               
-            </div>
-            <div id="trends">
-                <h2>
-                    Trends
-                </h2>
-                <div class="trend-list">
-                    {% for trend in trends %}
-                    <div class="trend">
-                        <p>{{trend.title}}
-                        <sup>
-                            {{trend.count}}
-                        </sup>
-                    </p>
+            <div class="profile-card">
+                    <div class="profile-card-user">
+                       
+                        <div class="profile-card-username">
+                            <img src="{% static 'main/dp.svg' %}" width="40px" alt="" srcset="">
+                            <div>
+                                Username <br>
+                                username
+                            </div>
+                            
+                        </div>
+                        <div class="follow-button">
+                            <img src="{% static 'main/add.svg' %}" width="20px" alt="" srcset="">
+                        </div>
+                        
+                    </div>
+                    <div class="bio">
+                        biooooooooooooooooooooooooooooo,biooooooooooooooooooooooooooooo
+                    </div>
                 </div>
-                    {% endfor %}
-                    
-                </div>
-            </div>
             <div id="people">
                 <h2>
                     Interesting People
@@ -91,7 +83,7 @@
         <div class="right-half">
             <div id="feed">
                 <h2>
-                    Feed
+                    QAITs by 
                 </h2>
                 
             </div>

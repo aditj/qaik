@@ -49,7 +49,8 @@ input,#new-qait-button{
     width: 30%;
 }
 .content .right-half{
-    width: 70%;
+    width: 65%;
+    margin: auto;
 }
 .content>div{
     width: 100%;
@@ -94,4 +95,20 @@ input:focus,textarea:focus{
 }
 sup{
     font-family: 'DM Mono';
+}
+.profile-card-user{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.profile-card-username{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.profile-card-username>img{
+    padding-right: 5px;
+}
+.bio{
+    overflow-wrap: break-word;
 }

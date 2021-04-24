@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300&family=DM+Sans&display=swap');
+*{
+    font-family: 'DM Sans', sans-serif;
+    color: white;
+}
+.container{
+    width: 50%;
+    margin: auto;
+    margin-top: 15vh;
+    text-align: center;
+    border: 0.5px solid black;
+ 
+    background: #172B4D;
+    color: white;
+}
+.input-group label{
+    display: block;
+    text-align: left;
+    width: 75%;
+    margin: auto;
+}
+input{
+    width:70%;
+    border-radius: 0;
+    background: none;
+    border: 1px solid white;
+}
+button{
+    background:none;
+    border: 1px solid white;
+    margin-top: 10px;
+
+}
+button:hover{
+    cursor: pointer;
+}
