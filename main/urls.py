@@ -10,4 +10,7 @@ path('logout',views.logout_view),
 path('create_qait',views.create_qait),
 path('profile',views.profile),
 path('like_dislike', views.like_dislike),
+path('reply',views.reply),
+path('replies/<int:qait_id>',views.see_replies)
+
 ]

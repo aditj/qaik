@@ -7,7 +7,8 @@ from django.contrib.auth import login,authenticate,logout
 import re
 from django.contrib.auth.models import User
 from django.contrib import messages #import messages
-from .models import QAIT,UserProfile,Hashtag, Like
+from .models import QAIT,UserProfile,Hashtag, Like,Reply
+from django.contrib.auth.hashers import make_password
 
 @login_required
 def feed(request):
@@ -20,9 +21,12 @@ def feed(request):
 
 def login_view(request):
 	if request.method=="POST":
+		print(request.POST['username'],request.POST['password'])
 		user=authenticate(username=request.POST['username'],password=request.POST['password'])
+		print(user)
 		if user is not None:
 			login(request,user)
+
 			return redirect("/feed")
 		else:
 			return redirect("/login")
@@ -30,7 +34,7 @@ def login_view(request):
 
 def register(request):
 	if request.method == "POST":
-		user = User(username=request.POST['username'],password=request.POST['password'],email=request.POST['email'],first_name=request.POST['first_name'],last_name=request.POST['last_name'])
+		user = User(username=request.POST['username'],password=make_password(request.POST['password']),email=request.POST['email'],first_name=request.POST['first_name'],last_name=request.POST['last_name'])
 		user.save()
 		p=UserProfile(user=user)
 		p.save()
@@ -75,3 +79,25 @@ def like_dislike(request):
 		l.save()
 	c=Like.objects.filter(qait=q).count()
 	return HttpResponse(c)
+def reply(request):
+	print(request.user)
+	q=QAIT.objects.get(id=request.POST['reply_to'])
+	content=request.POST['content']
+	p=UserProfile.objects.get(user=User.objects.get(username=request.POST['reply_by']))
+	r,created=Reply.objects.get_or_create(content=content,by=p,reply_to=q)
+
+	if(not created):
+		r.delete()
+	else:
+		r.save()
+	c=Reply.objects.filter(reply_to=q).count()
+	return HttpResponse(c)
+def see_replies(request,qait_id):
+	q=QAIT.objects.get(id=qait_id)
+	qaits=Reply.objects.filter(reply_to=q)
+	trends=Hashtag.objects.all()
+	
+	return render(request,"main/feed.html",context={
+		'trends':trends,
+		'qaits': qaits,
+	})

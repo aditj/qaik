@@ -16,6 +16,8 @@ class QAIT(models.Model):
     perc_objectionble=models.FloatField(default=0)
     def get_like_no(self):
         return Like.objects.filter(qait=self).count()
+    def get_reply_no(self):
+        return Reply.objects.filter(reply_to=self).count()
 
 class Reply(QAIT):
     reply_to=models.ForeignKey(QAIT,on_delete=models.CASCADE,related_name="parent_qait")

@@ -96,7 +96,7 @@
                 </h2>
                 <div>
                     {% for qait in qaits %}
-                    <div class = "qaits-list">
+                    <div class = "qaits-list" >
                         <div class = "qaits">
 
                             <div style="text-align: left; font-size: medium; ">
@@ -113,6 +113,11 @@
                                         <i data-qait-id="{{qait.id}}" class="like-button fa fas fa-heart" style="font-size: medium;"></i>
                                   <span class="like-count"> {{qait.get_like_no}}</span>
                             </div>
+                            <div>
+                                <i data-qait-id="{{qait.id}}" class="reply-button fa fas fa-retweet" style="font-size: medium;"></i>
+                                <span data-qait-id="{{qait.id}}" class="reply-count"> <a href="replies/{{qait.id}}">{{qait.get_reply_no}}</a></span>
+
+                            </div>
                         </div>
                         <br>
                     </div>
@@ -128,6 +133,29 @@
         
     </div>
  
+
+
+<!-- The Modal -->
+<div id="reply-modal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="modal-header">
+      <span class="close-modal">&times;</span>
+      <h2>Reply to QAIT</h2>
+    </div>
+    <div class="modal-body qaits-list" id="reply-container">
+      
+    </div>
+    <div class="modal-footer">
+
+      <input data-qait-id="" id="reply-qait" type="text">
+      <button id="reply-button">Reply</button>
+    </div>
+  </div>
+
+</div>
+
 <script src="{% static 'main/script/jquery-3.6.0.min.js' %}"></script>
     <script>
         
@@ -149,7 +177,39 @@
                 liked.next('.like-count').html(data);
             })
         })
-    
+       
+
+        $(".reply-button").click(function(){
+            var modal = document.getElementById("reply-modal");
+            var span = document.getElementsByClassName("close")[0];
+            modal.style.display = "block";
+            $('#reply-qait').attr("data-qait-id",$(this).attr("data-qait-id"))
+            $("#reply-container").html($(this).parent().parent().html())
+
+            
+        })
+        $("#reply-button").click(function(){
+            token = "{{ csrf_token }}"
+            $.ajax({
+                url:'/reply',
+                method:'POST',
+                data:{
+                    reply_by:"{{request.user.username}}",
+                    reply_to:$('#reply-qait').attr("data-qait-id"),
+                    content:$("#reply-qait").val(),
+                    csrfmiddlewaretoken:token ,
+                }
+            }).done(function(data){
+                $(".reply-count[data-qait-id="+$('#reply-qait').attr("data-qait-id")+"]").html(data)
+                $(".close-modal").click();
+            })
+        })
+
+        $(".close-modal").click(function(){
+            var modal = document.getElementById("reply-modal");
+            modal.style.display="none"
+        })
+        
     </script>
 
 </body>
