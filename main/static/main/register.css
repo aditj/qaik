@@ -1,18 +1,45 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300&family=DM+Sans&display=swap');
 *{
     font-family: 'DM Sans', sans-serif;
-    color: white;
+    color: rgba(0, 0, 0, 0.712);
+}
+
+body{
+    margin-top: 3%;
+    margin-left: 10%;
+    margin-right: 2%;
+    align-self: center;
+    background-color: #ffe9d4cb;
+}
+
+.introduction{
+    width: 40%;
+    margin-top:15%;
+    margin-left: -5%;
+    margin-right: 40%;
+    margin-bottom: -130px;
+    color: #015a56ea;
+    text-align: left;
+    text-decoration: solid;
+    
 }
 .container{
-    width: 50%;
-    margin: auto;
-    margin-top: 15vh;
+    width: 490px;
+    margin-top: -130px;
+    margin-right: 1%;
+    margin-left: 40%;
     text-align: center;
     border: 0.5px solid black;
- 
-    background: #172B4D;
-    color: white;
+    border-radius: 5px;
+    background: #f8bc4d9c;
+    color: rgba(37, 207, 219, 0.568);
 }
+
+.icon{
+    margin-left: 90%;
+    text-decoration: underline;
+}
+
 .input-group label{
     display: block;
     text-align: left;
@@ -20,17 +47,47 @@
     margin: auto;
 }
 input{
-    width:70%;
-    border-radius: 0;
-    background: none;
-    border: 1px solid white;
+    width:75%;
+    border-radius: 3px;
+    background: #f0e9de90;
+    border: 1px solid rgb(226, 179, 49);
 }
 button{
-    background:none;
-    border: 1px solid white;
-    margin-top: 10px;
+    background:#e2a350;
+    border: 1px solid #eb111162;
+    border-radius: 3px;
+    margin-top: 15px;
 
 }
 button:hover{
     cursor: pointer;
+}
+
+
+.loginIntro{
+    width: 40%;
+    margin: 1%;
+    margin-top:15%;
+    margin-left: -5%;
+    margin-right: 40%;
+    margin-bottom: -130px;
+    color: #015a56ea;
+    text-align: left;
+    text-decoration: solid;
+    
+}
+
+.loginContainer{
+
+    width: 490px;
+    margin-top: -70px;
+    margin-right: 1%;
+    margin-left: 40%;
+    margin-bottom: 10%;
+    text-align: center;
+    border: 0.5px solid black;
+    border-radius: 5px;
+    background: #f8bc4d9c;
+    color: rgba(37, 207, 219, 0.568);
+
 }
