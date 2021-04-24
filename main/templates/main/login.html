@@ -7,9 +7,13 @@
 {% block content %} 
 
    
+<div class="loginIntro" style="float:left">
+	<h1>Welcome to the QAIT - Quantum Artificial Intelligence aided Tweeter.</h1>
+	<h1>Please Login to your account.</h1>
+</div>
 
 <!--Register--> 
-<div class="container">
+<div class="loginContainer" style="float:left">
 	<h1>Login</h1>
 	<form method="POST">
 		{% csrf_token %}
@@ -17,6 +21,7 @@
 			<label for="username">Username</label>
             <input type="text" name="username" id="username">
 		</div>
+		<div style="clear:both;">&nbsp;</div>
 		<div class="input-group">
 			<label for="password">Password</label>
             <input type="password" name="password" id="password">
@@ -33,6 +38,9 @@
     
 
 	<p class="text-center">Create a new QAIT account, <a href="/register">now</a>.</p>
+</div>
+<div class="icon">
+	<h1>QAIT</h1>
 </div>
 
 {% endblock %}
