@@ -3,13 +3,16 @@ from .forms import NewUserForm
 from django.contrib.auth.forms import AuthenticationForm 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login,authenticate,logout
-
+import re
 
 from django.contrib import messages #import messages
-from .models import QAIT,Profile
+from .models import QAIT,UserProfile,Hashtag
 @login_required
 def feed(request):
-    return render(request,"main/feed.html")
+	trends=Hashtag.objects.all()
+	return render(request,"main/feed.html",context={
+		'trends':trends,
+	})
 def login_view(request):
 	if request.method=="POST":
 		user=authenticate(username=request.POST['username'],password=request.POST['password'])
@@ -24,7 +27,8 @@ def register(request):
 		form = NewUserForm(request.POST)
 		if form.is_valid():
 			user = form.save()
-			Profile(username=user)
+			p=UserProfile(user=user)
+			p.save()
 			login(request, user)
 			messages.success(request, "Registration successful." )
 			return redirect("/feed")
@@ -35,9 +39,14 @@ def logout_view(request):
 	logout(request)
 	return redirect("/login")
 def create_qait(request):
-	p=Profile.objects.filter(username=request.user).first()
-	print(request.user.profile)
+	hashtags=re.findall("#(\w+)",request.POST["content"])
+	for h in hashtags:
+		hashtag=Hashtag.objects.get_or_create(title=h)
+		hashtag.count= hashtag.count+1
+		hashtag.save()
+	p=UserProfile.objects.filter(user=request.user).first()
+	
 	q=QAIT(content=request.POST["content"],by=p)
 
 	q.save()
-	return redirect('/login')
+	return redirect('/feed')

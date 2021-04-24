@@ -1,16 +1,16 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.conf import settings
 
-# Create your models here.
-class Profile(User):
-    # TODO add User Image
+class UserProfile(models.Model):
+    user=models.OneToOneField(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
     bio=models.TextField(blank=True,default='')
     dob=models.DateField(blank=True,null=True)
     perc_objectionble=models.FloatField(default=0)
 
 class QAIT(models.Model):
     content=models.CharField(max_length=140)
-    by=models.ForeignKey(Profile,on_delete=models.CASCADE)
+    by=models.ForeignKey(UserProfile,on_delete=models.CASCADE)
     date=models.DateField(auto_created=True,auto_now_add=True)
     time=models.TimeField(auto_created=True,auto_now_add=True)
     perc_objectionble=models.FloatField(default=0)
@@ -20,11 +20,11 @@ class Reply(QAIT):
 
 class Like(models.Model):
     qait=models.ForeignKey(QAIT,on_delete=models.CASCADE)
-    liker=models.ForeignKey(Profile,on_delete=models.CASCADE)
+    liker=models.ForeignKey(UserProfile,on_delete=models.CASCADE)
 
 class Following(models.Model):
-    follower=models.ForeignKey(User,on_delete=models.CASCADE,related_name="follower")
-    following= models.ForeignKey(User,on_delete=models.CASCADE,related_name="following")
+    follower=models.ForeignKey(UserProfile,on_delete=models.CASCADE,related_name="follower")
+    following= models.ForeignKey(UserProfile,on_delete=models.CASCADE,related_name="following")
 
 class Hashtag(models.Model):
     title=models.CharField(max_length=50)
