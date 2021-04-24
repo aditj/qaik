@@ -14,6 +14,8 @@ class QAIT(models.Model):
     date=models.DateField(auto_created=True,auto_now_add=True)
     time=models.TimeField(auto_created=True,auto_now_add=True)
     perc_objectionble=models.FloatField(default=0)
+    def get_like_no(self):
+        return Like.objects.filter(qait=self).count()
 
 class Reply(QAIT):
     reply_to=models.ForeignKey(QAIT,on_delete=models.CASCADE,related_name="parent_qait")

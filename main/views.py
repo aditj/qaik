@@ -1,4 +1,4 @@
-from django.http import request
+from django.http import request,HttpResponse
 from django.shortcuts import render,redirect
 from .forms import NewUserForm
 from django.contrib.auth.forms import AuthenticationForm 
@@ -63,5 +63,15 @@ def profile(request):
 
 
 def like_dislike(request):
-	inp = request.POST
-	print(inp)
+	q=QAIT.objects.get(id=request.POST['postId'])
+	p=UserProfile.objects.get(user=User.objects.get(username=request.POST['likedBy']))
+
+	
+	l,created=Like.objects.get_or_create(qait=q,liker=p)
+
+	if(not created):
+		l.delete()
+	else:
+		l.save()
+	c=Like.objects.filter(qait=q).count()
+	return HttpResponse(c)

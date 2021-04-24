@@ -55,7 +55,11 @@ input,#new-qait-button{
 .content>div{
     width: 100%;
 }
-
+#feed{
+    overflow-y: scroll;
+    max-height: 80vh;
+    margin-top: 10px;
+}
 #new-qait {
     color: white;
     background: none;

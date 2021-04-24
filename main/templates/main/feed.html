@@ -109,12 +109,9 @@
                             </p>
 
                             <div style = "text-align: right; padding: 1%;">
-                                <!-- <form action="like_dislike" method = "POST">
-                                    {% csrf_token %}
-                                    <button type = "submit"> -->
-                                        <i onclick=myFunction(this) class="fa fas fa-heart" style="font-size: medium;"></i>
-                                    <!-- </button>
-                                </form> -->
+                            
+                                        <i data-qait-id="{{qait.id}}" class="like-button fa fas fa-heart" style="font-size: medium;"></i>
+                                  <span class="like-count"> {{qait.get_like_no}}</span>
                             </div>
                         </div>
                         <br>
@@ -131,11 +128,27 @@
         
     </div>
  
-
+<script src="{% static 'main/script/jquery-3.6.0.min.js' %}"></script>
     <script>
-        function myFunction(x) {
-          x.classList.toggle("like");
-        }
+        
+        $('.like-button').click(function () {
+            token = "{{ csrf_token }}"
+        liked=$(this)
+        $(this).toggleClass("like-button")
+        
+            $.ajax({
+                url:'/like_dislike',
+                type:'POST',
+                data:{
+                    postId:$(this).attr('data-qait-id'),
+                    likedBy:"{{request.user.username}}",
+                    csrfmiddlewaretoken:token ,
+                },
+                
+            }).done(function(data){
+                liked.next('.like-count').html(data);
+            })
+        })
     
     </script>
 
