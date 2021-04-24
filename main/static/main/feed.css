@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300&family=DM+Sans&display=swap');
+*{
+    font-family: 'DM Sans', sans-serif;
+    color: white;
+}
+.black{
+    color:black;
+}
+body{
+    background-color: #6554C0;
+}
+.header{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin: auto;
+}
+.header .left-half{
+display: flex;
+
+}
+.header .left-half>div{
+    margin: 10%;
+    
+    }
+.header .right-half{
+width: 45%;
+}
+input,#new-qait-button{
+    font-family:'DM Mono',monospace;
+    color: black;
+}
+#searchbar{
+    padding: 10px;
+    width: 100%;
+    background: #F4F8FB;
+    border: none;
+
+    box-sizing: border-box;
+    border-radius: 13px 0px 0px 13px;
+}
+.content{
+    display: flex;
+   margin: auto;
+    width: 80%;
+}
+.content .left-half{
+    width: 30%;
+}
+.content .right-half{
+    width: 70%;
+}
+.content>div{
+    width: 100%;
+}
+
+#new-qait {
+    color: white;
+    background: none;
+    width: 80%;
+    height: 2em;
+    border: none;
+    border-bottom: 1px white dashed;
+    /* -webkit-tap-highlight-color: rgba(0, 0, 0, 0); */
+}
+#new-qait:focus{
+    border-bottom: 2px white dashed;
+}
+button{
+    cursor: pointer;
+}
+input:focus,textarea:focus{
+    outline: none;
+}
+.search-bar-container{
+    display: flex;
+}
+.search-bar-container img{
+    border: none;
+    width: 18px;
+    background: #F4F8FB;
+    border-radius: 0px 13px 13px 0px;
+    padding: 5px;
+}
+.search-bar-container img:hover{
+    cursor: pointer;
+}

@@ -1,0 +1,71 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{% static 'main/feed.css' %}">
+    <style>
+        
+    </style>
+    <title>Feed</title>
+</head>
+<body>
+
+    <div class="header">
+        <div class="left-half">
+            <div id="myprofile">
+                <img src="{% static 'main/fingerprint.svg' %}" width="20px" alt="" srcset="">
+            </div>
+            <div id="logo">
+                QAIT
+            </div>
+            
+        </div>
+        <div class="right-half search-bar-container">
+            <input placeholder="Search" class="black" id="searchbar">
+            <img src="{% static 'main/search.svg' %}" width="20px" alt="" srcset="">
+
+        </div>
+        
+        
+    </div>
+    <div class="content">
+        <div class="left-half">
+            <div id="compose">
+                <h2>
+                    Compose
+                </h2>
+                <form action="/create_qait" method="POST">
+                    {% csrf_token %}
+                    <input type="text" name="content" maxlength="140" id="new-qait">
+                    <button type="submit" id="new-qait-button" class="black">QAIT</button>
+                </form>
+               
+            </div>
+            <div id="trends">
+                <h2>
+                    Trends
+                </h2>
+            </div>
+            <div id="people">
+                <h2>
+                    Interesting People
+                </h2>
+            </div>
+        </div>
+        <div class="right-half">
+            <div id="feed">
+                <h2>
+                    Feed
+                </h2>
+            </div>
+        </div>
+    </div>
+    <h2>
+        <a href="/logout">logout</a>
+    </h2>
+</body>
+</html>
