@@ -26,8 +26,9 @@
             
         </div>
         <div class="right-half search-bar-container">
+
             <input placeholder="Search" class="black" id="searchbar">
-            <img src="{% static 'main/search.svg' %}" width="20px" alt="" srcset="">
+            <img src="{% static 'main/search.svg' %}" width="20px" id="search-button" alt="" srcset="">
 
         </div>
         
@@ -67,32 +68,42 @@
                 <h2>
                     Interesting People
                 </h2>
-                <div class="profile-card">
-                    <div class="profile-card-user">
-                       
-                        <div class="profile-card-username">
-                            <img src="{% static 'main/dp.svg' %}" width="40px" alt="" srcset="">
-                            <div>
-                                Username <br>
-                                username
+                <div>
+                    {% for person in people %}
+                    <div class="profile-card">
+                        <div class="profile-card-user">
+                           
+                            <div class="profile-card-username">
+                                <img src="{% static 'main/dp.svg' %}" width="40px" alt="" srcset="">
+                                <div>
+                                    {{person.user.first_name}} {{person.user.second_name}} <br>
+                                    {{person.user.username}}
+                                </div>
+                                
+                            </div>
+                            <div class="follow-button">
+                                <i data-person-id="{{person.id}}" class="follow-person fa fas fa-plus-circle"></i>
                             </div>
                             
                         </div>
-                        <div class="follow-button">
-                            <img src="{% static 'main/add.svg' %}" width="20px" alt="" srcset="">
+                        <div class="bio">
+                            {% if person.bio %}
+                            {{person.bio}}
+                            
+                            {% else %}
+                            This is the interesting bio of the person here. 
+                            {% endif %}
                         </div>
-                        
                     </div>
-                    <div class="bio">
-                        biooooooooooooooooooooooooooooo,biooooooooooooooooooooooooooooo
-                    </div>
+                    {% endfor %}
                 </div>
+               
             </div>
         </div>
         <div class="right-half">
             <div id="feed">
                 <h2>
-                    Feed
+                    {{feed_title}}
                 </h2>
                 <div>
                     {% for qait in qaits %}
@@ -162,7 +173,7 @@
         $('.like-button').click(function () {
             token = "{{ csrf_token }}"
         liked=$(this)
-        $(this).toggleClass("like-button")
+        $(this).toggleClass("like")
         
             $.ajax({
                 url:'/like_dislike',
@@ -209,7 +220,30 @@
             var modal = document.getElementById("reply-modal");
             modal.style.display="none"
         })
-        
+        $('.follow-person').click(function(){
+            token = "{{ csrf_token }}"
+            followed=$(this)
+            followed.toggleClass('fa-plus-circle')
+            followed.toggleClass('fa-check-circle')
+            $.ajax({
+                url:'/follow',
+                method:'POST',
+                data:{
+                    person_id:$(this).attr('data-person-id'),
+                   
+                    csrfmiddlewaretoken:token ,
+                }
+            }).done(function(data){
+                 
+            })
+        })
+        $("#search-button").click(function(){
+            
+           
+                window.location.replace("/search/"+$('#searchbar').val());
+
+            
+        })
     </script>
 
 </body>

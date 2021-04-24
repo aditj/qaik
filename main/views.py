@@ -7,16 +7,20 @@ from django.contrib.auth import login,authenticate,logout
 import re
 from django.contrib.auth.models import User
 from django.contrib import messages #import messages
-from .models import QAIT,UserProfile,Hashtag, Like,Reply
+from .models import QAIT,UserProfile,Hashtag, Like,Reply,Following
 from django.contrib.auth.hashers import make_password
+from django.db.models import Exists, OuterRef
 
 @login_required
 def feed(request):
 	trends=Hashtag.objects.all()
 	qaits = QAIT.objects.all()
+	people=UserProfile.objects.all()
 	return render(request,"main/feed.html",context={
+		'feed_title':'Feed',
 		'trends':trends,
 		'qaits': qaits,
+		'people':people,
 	})
 
 def login_view(request):
@@ -62,8 +66,9 @@ def create_qait(request):
 
 	q.save()
 	return redirect('/feed')
-def profile(request):
-	return render(request,"main/profile.html")
+def profile(request,user):
+	user=UserProfile.objects.get(user=User.objects.get(username=user))
+	return render(request,"main/profile.html",context={'user':user})
 
 
 def like_dislike(request):
@@ -80,10 +85,10 @@ def like_dislike(request):
 	c=Like.objects.filter(qait=q).count()
 	return HttpResponse(c)
 def reply(request):
-	print(request.user)
+	
 	q=QAIT.objects.get(id=request.POST['reply_to'])
 	content=request.POST['content']
-	p=UserProfile.objects.get(user=User.objects.get(username=request.POST['reply_by']))
+	p=UserProfile.objects.get(user=User.objects.get(username=request.user))
 	r,created=Reply.objects.get_or_create(content=content,by=p,reply_to=q)
 
 	if(not created):
@@ -94,10 +99,31 @@ def reply(request):
 	return HttpResponse(c)
 def see_replies(request,qait_id):
 	q=QAIT.objects.get(id=qait_id)
-	qaits=Reply.objects.filter(reply_to=q)
 	trends=Hashtag.objects.all()
-	
+	qaits = QAIT.objects.all()
+	people=UserProfile.objects.all()
 	return render(request,"main/feed.html",context={
+		'feed_title':'Feed',
 		'trends':trends,
 		'qaits': qaits,
+		'people':people,
+	})
+def create_following(request):
+	following=UserProfile.objects.get(id=request.POST['person_id'])
+	follower=UserProfile.objects.get(user=User.objects.get(username=request.user))
+	f,created=Following.objects.get_or_create(follower=follower,following=following)
+	if(not created):
+		f.delete()
+	else:
+		f.save()
+	return HttpResponse(created)
+def search(request,query):
+	qaits=QAIT.objects.filter(content__contains=query)
+	trends=Hashtag.objects.all()
+	people=UserProfile.objects.all()
+	return render(request,"main/feed.html",context={
+		'feed_title':'Search Results',
+		'trends':trends,
+		'qaits': qaits,
+		'people':people,
 	})

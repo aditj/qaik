@@ -64,6 +64,11 @@ input,#new-qait-button{
     max-height: 80vh;
     margin-top: 10px;
 }
+#people{
+    padding-right: 10px;
+    overflow-y: scroll;
+    max-height: 60vh;
+}
 #new-qait {
     color: white;
     background: none;
@@ -121,10 +126,11 @@ sup{
     overflow-wrap: break-word;
 }
 .qaits{
-    padding: 1%;    
+    padding: 1%;
     background-color: #5c4ead;
-    width: 80%;
+    width: 85%;
     border-radius: 0.2cm;
+    margin: auto;
 }
 
 .fa {
@@ -220,4 +226,26 @@ sup{
   @keyframes fadeIn {
     from {opacity: 0} 
     to {opacity: 1}
+  }
+/* width */
+::-webkit-scrollbar {
+    width:5px;
+  }
+  
+  /* Track
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey; 
+    border-radius: 10px;
+  }
+    */
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: black; 
+    border-radius: 10px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+      cursor: pointer;
+    background: gray; 
   }
