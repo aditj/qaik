@@ -24,6 +24,7 @@ def register(request):
 		form = NewUserForm(request.POST)
 		if form.is_valid():
 			user = form.save()
+			Profile(username=user)
 			login(request, user)
 			messages.success(request, "Registration successful." )
 			return redirect("/feed")
@@ -34,7 +35,7 @@ def logout_view(request):
 	logout(request)
 	return redirect("/login")
 def create_qait(request):
-	p=Profile.objects.filter(user=request.user).first()
+	p=Profile.objects.filter(username=request.user).first()
 	print(request.user.profile)
 	q=QAIT(content=request.POST["content"],by=p)
 
