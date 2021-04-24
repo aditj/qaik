@@ -6,13 +6,17 @@ from django.contrib.auth import login,authenticate,logout
 import re
 
 from django.contrib import messages #import messages
-from .models import QAIT,UserProfile,Hashtag
+from .models import QAIT,UserProfile,Hashtag, Like
+
 @login_required
 def feed(request):
 	trends=Hashtag.objects.all()
+	qaits = QAIT.objects.all()
 	return render(request,"main/feed.html",context={
 		'trends':trends,
+		'qaits': qaits,
 	})
+
 def login_view(request):
 	if request.method=="POST":
 		user=authenticate(username=request.POST['username'],password=request.POST['password'])
@@ -22,6 +26,7 @@ def login_view(request):
 		else:
 			return redirect("/login")
 	return render(request,"main/login.html")
+
 def register(request):
 	if request.method == "POST":
 		form = NewUserForm(request.POST)
@@ -35,9 +40,11 @@ def register(request):
 		messages.error(request, "Unsuccessful registration. Invalid information.")
 	form = NewUserForm
 	return render (request=request, template_name="main/register.html", context={"register_form":form})
+
 def logout_view(request):
 	logout(request)
 	return redirect("/login")
+
 def create_qait(request):
 	hashtags=re.findall("#(\w+)",request.POST["content"])
 	for h in hashtags:
@@ -50,3 +57,8 @@ def create_qait(request):
 
 	q.save()
 	return redirect('/feed')
+
+
+def like_dislike(request):
+	inp = request.POST
+	print(inp)

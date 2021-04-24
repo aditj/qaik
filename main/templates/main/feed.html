@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="{% static 'main/feed.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
         
     </style>
@@ -73,12 +74,46 @@
                 <h2>
                     Feed
                 </h2>
-                
+                <div>
+                    {% for qait in qaits %}
+                    <div class = "qaits-list">
+                        <div class = "qaits">
+
+                            <div style="text-align: left; font-size: medium; ">
+                                @{{qait.by.user.username}} <p style="font-weight: 100; font-size: small; color: rgb(209, 219, 219);">{{ qait.date }} &middot; {{qait.time}}</p>
+                                </p>
+                                
+                            </div>
+                            <p style="margin-bottom: 1%;">
+                                {{qait.content}}
+                            </p>
+
+                            <div style = "text-align: right; padding: 1%;">
+                                <!-- <form action="like_dislike" method = "POST">
+                                    {% csrf_token %}
+                                    <button type = "submit"> -->
+                                        <i onclick=myFunction(this) class="fa fas fa-heart" style="font-size: medium;"></i>
+                                    <!-- </button>
+                                </form> -->
+                            </div>
+                        </div>
+                        <br>
+                    </div>
+                    {% endfor %}
+                </div>
             </div>
         </div>
     </div>
     <h2>
         <a href="/logout">logout</a>
     </h2>
+
+    <script>
+        function myFunction(x) {
+          x.classList.toggle("like");
+        }
+    
+    </script>
+
 </body>
 </html>

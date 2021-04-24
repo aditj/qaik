@@ -7,5 +7,6 @@ path('feed',views.feed),
 path('login',views.login_view),
 path('register',views.register),
 path('logout',views.logout_view),
-path('create_qait',views.create_qait)
+path('create_qait',views.create_qait),
+path('like_dislike', views.like_dislike),
 ]

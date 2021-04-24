@@ -3,7 +3,7 @@ from .models import Hashtag
 
 admin.site.register(Hashtag)
 # Register your models here.
-from .models import QAIT, Profile
+from .models import QAIT, UserProfile
 
 admin.site.register(QAIT)
-admin.site.register(Profile)
+admin.site.register(UserProfile)

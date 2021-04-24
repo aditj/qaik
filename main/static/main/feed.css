@@ -95,3 +95,25 @@ input:focus,textarea:focus{
 sup{
     font-family: 'DM Mono';
 }
+
+.qaits{
+    padding: 1%;    
+    background-color: #5c4ead;
+    width: 80%;
+    border-radius: 0.2cm;
+}
+
+.fa {
+    font-size: 50px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.fa:hover {
+    color: rgb(204, 204, 204);
+}
+
+.like{
+    font-size: 50px;
+    color:#a293f7;
+}
