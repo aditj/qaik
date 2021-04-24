@@ -96,7 +96,6 @@ input:focus,textarea:focus{
 sup{
     font-family: 'DM Mono';
 }
-<<<<<<< HEAD
 .profile-card-user{
     display: flex;
     justify-content: space-between;
@@ -112,8 +111,7 @@ sup{
 }
 .bio{
     overflow-wrap: break-word;
-=======
-
+}
 .qaits{
     padding: 1%;    
     background-color: #5c4ead;
@@ -134,5 +132,4 @@ sup{
 .like{
     font-size: 50px;
     color:#a293f7;
->>>>>>> d45dfe58a9fff634e122b3f85583b2c0e8a6498b
 }

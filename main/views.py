@@ -12,11 +12,7 @@ from .models import QAIT,UserProfile,Hashtag, Like
 @login_required
 def feed(request):
 	trends=Hashtag.objects.all()
-<<<<<<< HEAD
-
-=======
 	qaits = QAIT.objects.all()
->>>>>>> d45dfe58a9fff634e122b3f85583b2c0e8a6498b
 	return render(request,"main/feed.html",context={
 		'trends':trends,
 		'qaits': qaits,
@@ -34,7 +30,6 @@ def login_view(request):
 
 def register(request):
 	if request.method == "POST":
-<<<<<<< HEAD
 		user = User(username=request.POST['username'],password=request.POST['password'],email=request.POST['email'],first_name=request.POST['first_name'],last_name=request.POST['last_name'])
 		user.save()
 		p=UserProfile(user=user)
@@ -45,20 +40,6 @@ def register(request):
 	
 
 	return render (request=request, template_name="main/register.html")
-=======
-		form = NewUserForm(request.POST)
-		if form.is_valid():
-			user = form.save()
-			p=UserProfile(user=user)
-			p.save()
-			login(request, user)
-			messages.success(request, "Registration successful." )
-			return redirect("/feed")
-		messages.error(request, "Unsuccessful registration. Invalid information.")
-	form = NewUserForm
-	return render (request=request, template_name="main/register.html", context={"register_form":form})
-
->>>>>>> d45dfe58a9fff634e122b3f85583b2c0e8a6498b
 def logout_view(request):
 	logout(request)
 	return redirect("/login")
@@ -77,13 +58,10 @@ def create_qait(request):
 
 	q.save()
 	return redirect('/feed')
-<<<<<<< HEAD
 def profile(request):
 	return render(request,"main/profile.html")
-=======
 
 
 def like_dislike(request):
 	inp = request.POST
 	print(inp)
->>>>>>> d45dfe58a9fff634e122b3f85583b2c0e8a6498b
