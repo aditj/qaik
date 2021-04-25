@@ -25,8 +25,15 @@ display: flex;
 
 }
 .header .left-half>div{
-    margin: 10%;
+    margin: auto;
     
+    }
+    .header .left-half #myprofile{
+        padding-right: 20px;
+
+    }
+    .header #logo{
+        font-size: 30px;
     }
 .header .right-half{
 width: 45%;

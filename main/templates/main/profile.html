@@ -1,95 +1,135 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="{% static 'main/feed.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <style>
-        
+
     </style>
     <title>Feed</title>
 </head>
+
 <body>
 
     <div class="header">
         <div class="left-half">
             <div id="myprofile">
-                <img src="{% static 'main/fingerprint.svg' %}" width="20px" alt="" srcset="">
+                <img src="{% static 'main/fingerprint.svg' %}" height="40px" alt="" srcset="">
             </div>
             <div id="logo">
                 QAIT
             </div>
-            
-        </div>
-        <div class="right-half search-bar-container">
-            <input placeholder="Search" class="black" id="searchbar">
-            <img src="{% static 'main/search.svg' %}" width="20px" alt="" srcset="">
 
         </div>
-        
-        
+        <div class="right-half search-bar-container">
+
+            <input placeholder="Search" class="black" id="searchbar">
+            <img src="{% static 'main/search.svg' %}" width="20px" id="search-button" alt="" srcset="">
+
+        </div>
+
+
     </div>
     <div class="content">
         <div class="left-half">
+            <h2>Profile</h2>
             <div class="profile-card">
-                    <div class="profile-card-user">
-                       
-                        <div class="profile-card-username">
-                            <img src="{% static 'main/dp.svg' %}" width="40px" alt="" srcset="">
-                            <div>
-                                {{user.user.first_name}} <br>
-                                @{{user.user.username}}
-                            </div>
-                            
+                <div class="profile-card-user">
+
+                    <div class="profile-card-username">
+                        <img src="{% static 'main/dp.svg' %}" width="40px" alt="" srcset="">
+                        <div>
+                            {{user.user.first_name}} <br>
+                            @{{user.user.username}}
                         </div>
-                        <div class="follow-button">
-                            <img src="{% static 'main/add.svg' %}" width="20px" alt="" srcset="">
-                        </div>
-                        
+
                     </div>
-                    <div class="bio">
-                        {% if user.bio %}
-                            {{user.bio}}
-                            
-                            {% else %}
-                            This is the interesting bio of the person here. 
-                            {% endif %}
+                    <div class="follow-button">
+                        <img src="{% static 'main/add.svg' %}" width="20px" alt="" srcset="">
                     </div>
+
                 </div>
+                <div class="bio">
+                    {% if user.bio %}
+                    {{user.bio}}
+
+                    {% else %}
+                    This is the interesting bio of the person here.
+                    {% endif %}
+                </div>
+            </div>
             <div id="people">
-                <h2>
-                    Followers
-                </h2>
-                {% for person in people %}
+                <div class="followers">
+                    <h2>
+                        Followers
+                    </h2>
+                    {% for follower in followers %}
                     <div class="profile-card">
                         <div class="profile-card-user">
-                           
+
                             <div class="profile-card-username">
                                 <img src="{% static 'main/dp.svg' %}" width="40px" alt="" srcset="">
                                 <div>
-                                    {{person.user.first_name}} {{person.user.second_name}} <br>
-                                    {{person.user.username}}
+                                    {{follower.follower.user.first_name}} {{follower.follower.user.second_name}} <br>
+                                    {{follower.follower.user.username}}
                                 </div>
-                                
+
                             </div>
                             <div class="follow-button">
                                 <i data-person-id="{{person.id}}" class="follow-person fa fas fa-plus-circle"></i>
                             </div>
-                            
+
                         </div>
                         <div class="bio">
-                            {% if person.bio %}
-                            {{person.bio}}
-                            
+                            {% if follower.follower.bio %}
+                            {{follower.follower.bio}}
+
                             {% else %}
-                            This is the interesting bio of the person here. 
+                            This is the interesting bio of the person here.
                             {% endif %}
                         </div>
                     </div>
-                {% endfor %}
+                    {% endfor %}
+                </div>
+                <div class="following">
+                    <h2>
+                        Following
+                    </h2>
+                    {% for follower in following %}
+                    <div class="profile-card">
+                        <div class="profile-card-user">
+
+                            <div class="profile-card-username">
+                                <img src="{% static 'main/dp.svg' %}" width="40px" alt="" srcset="">
+                                <div>
+                                    {{follower.following.user.first_name}} {{follower.following.user.second_name}} <br>
+                                    {{follower.following.user.username}}
+                                </div>
+
+                            </div>
+                            <div class="follow-button">
+                                <i data-person-id="{{person.id}}" class="follow-person fa fas fa-plus-circle"></i>
+                            </div>
+
+                        </div>
+                        <div class="bio">
+                            {% if follower.following.bio %}
+                            {{follower.following.bio}}
+
+                            {% else %}
+                            This is the interesting bio of the person here.
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
             </div>
         </div>
         <div class="right-half">
@@ -99,27 +139,32 @@
                 </h2>
                 <div>
                     {% for qait in qaits %}
-                    <div class = "qaits-list" >
-                        <div class = "qaits">
-
+                    <div class="qaits-list">
+                        <div class="qaits">
+    
                             <div style="text-align: left; font-size: medium; ">
-                                @{{qait.by.user.username}} <p style="font-weight: 100; font-size: small; color: rgb(209, 219, 219);">{{ qait.date }} &middot; {{qait.time}}</p>
+                                @{{qait.by.user.username}} <p
+                                    style="font-weight: 100; font-size: small; color: rgb(209, 219, 219);">{{ qait.date }}
+                                    &middot; {{qait.time}}</p>
                                 </p>
-                                
+    
                             </div>
                             <p style="margin-bottom: 1%;">
                                 {{qait.content}}
                             </p>
-
-                            <div style = "text-align: right; padding: 1%;">
-                            
-                                        <i data-qait-id="{{qait.id}}" class="like-button fa fas fa-heart" style="font-size: medium;"></i>
-                                  <span class="like-count"> {{qait.get_like_no}}</span>
+    
+                            <div style="text-align: right; padding: 1%;">
+    
+                                <i data-qait-id="{{qait.id}}" class="like-button fa fas fa-heart"
+                                    style="font-size: medium;"></i>
+                                <span class="like-count"> {{qait.get_like_no}}</span>
                             </div>
                             <div>
-                                <i data-qait-id="{{qait.id}}" class="reply-button fa fas fa-retweet" style="font-size: medium;"></i>
-                                <span data-qait-id="{{qait.id}}" class="reply-count"> <a href="replies/{{qait.id}}">{{qait.get_reply_no}}</a></span>
-
+                                <i data-qait-id="{{qait.id}}" class="reply-button fa fas fa-retweet"
+                                    style="font-size: medium;"></i>
+                                <span data-qait-id="{{qait.id}}" class="reply-count"> <a
+                                        href="/replies/{{qait.id}}">{{qait.get_reply_no}}</a></span>
+    
                             </div>
                         </div>
                         <br>
@@ -129,113 +174,116 @@
             </div>
         </div>
     </div>
+   
 
     <div class="footer">
         <div class="logout">
             <a href="/logout">logout.</a>
         </div>
-        
+
     </div>
-     
 
 
-<!-- The Modal -->
-<div id="reply-modal" class="modal">
 
-  <!-- Modal content -->
-  <div class="modal-content">
-    <div class="modal-header">
-      <span class="close-modal">&times;</span>
-      <h2>Reply to QAIT</h2>
+    <!-- The Modal -->
+    <div id="reply-modal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close-modal">&times;</span>
+                <h2>Reply to QAIT</h2>
+            </div>
+            <div class="modal-body qaits-list" id="reply-container">
+
+            </div>
+            <div class="modal-footer">
+
+                <input data-qait-id="" id="reply-qait" type="text">
+                <button id="reply-button">Reply</button>
+            </div>
+        </div>
+
     </div>
-    <div class="modal-body qaits-list" id="reply-container">
-      
-    </div>
-    <div class="modal-footer">
+    <script src="{% static 'main/script/jquery-3.6.0.min.js' %}"></script>
 
-      <input data-qait-id="" id="reply-qait" type="text">
-      <button id="reply-button">Reply</button>
-    </div>
-  </div>
-
-</div>
     <script>
-      
         $('.like-button').click(function () {
             token = "{{ csrf_token }}"
-        liked=$(this)
-        $(this).toggleClass("like")
-        
+            liked = $(this)
+            $(this).toggleClass("like")
+
             $.ajax({
-                url:'/like_dislike',
-                type:'POST',
-                data:{
-                    postId:$(this).attr('data-qait-id'),
-                    likedBy:"{{request.user.username}}",
-                    csrfmiddlewaretoken:token ,
+                url: '/like_dislike',
+                type: 'POST',
+                data: {
+                    postId: $(this).attr('data-qait-id'),
+                    likedBy: "{{request.user.username}}",
+                    csrfmiddlewaretoken: token,
                 },
-                
-            }).done(function(data){
+
+            }).done(function (data) {
                 liked.next('.like-count').html(data);
             })
         })
-       
 
-        $(".reply-button").click(function(){
+
+        $(".reply-button").click(function () {
             var modal = document.getElementById("reply-modal");
             var span = document.getElementsByClassName("close")[0];
             modal.style.display = "block";
-            $('#reply-qait').attr("data-qait-id",$(this).attr("data-qait-id"))
+            $('#reply-qait').attr("data-qait-id", $(this).attr("data-qait-id"))
             $("#reply-container").html($(this).parent().parent().html())
 
-            
+
         })
-        $("#reply-button").click(function(){
+        $("#reply-button").click(function () {
             token = "{{ csrf_token }}"
             $.ajax({
-                url:'/reply',
-                method:'POST',
-                data:{
-                    reply_by:"{{request.user.username}}",
-                    reply_to:$('#reply-qait').attr("data-qait-id"),
-                    content:$("#reply-qait").val(),
-                    csrfmiddlewaretoken:token ,
+                url: '/reply',
+                method: 'POST',
+                data: {
+                    reply_by: "{{request.user.username}}",
+                    reply_to: $('#reply-qait').attr("data-qait-id"),
+                    content: $("#reply-qait").val(),
+                    csrfmiddlewaretoken: token,
                 }
-            }).done(function(data){
-                $(".reply-count[data-qait-id="+$('#reply-qait').attr("data-qait-id")+"]").html(data)
+            }).done(function (data) {
+                $(".reply-count[data-qait-id=" + $('#reply-qait').attr("data-qait-id") + "]").html(`<a href="/replies/${$('#reply-qait').attr("data-qait-id")}">${data}</a>`)
                 $(".close-modal").click();
             })
         })
 
-        $(".close-modal").click(function(){
+        $(".close-modal").click(function () {
             var modal = document.getElementById("reply-modal");
-            modal.style.display="none"
+            modal.style.display = "none"
         })
-        $('.follow-person').click(function(){
+        $('.follow-person').click(function () {
             token = "{{ csrf_token }}"
-            followed=$(this)
+            followed = $(this)
             followed.toggleClass('fa-plus-circle')
             followed.toggleClass('fa-check-circle')
             $.ajax({
-                url:'/follow',
-                method:'POST',
-                data:{
-                    person_id:$(this).attr('data-person-id'),
-                   
-                    csrfmiddlewaretoken:token ,
+                url: 'follow',
+                method: 'POST',
+                data: {
+                    person_id: $(this).attr('data-person-id'),
+
+                    csrfmiddlewaretoken: token,
                 }
-            }).done(function(data){
-                 
+            }).done(function (data) {
+
             })
         })
-        $("#search-button").click(function(){
-            
-           
-                window.location.replace("/search/"+$('#searchbar').val());
+        $("#search-button").click(function () {
 
-            
+
+            window.location.replace("/search/" + $('#searchbar').val());
+
+
         })
     </script>
 
 </body>
+
 </html>

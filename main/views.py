@@ -68,7 +68,11 @@ def create_qait(request):
 	return redirect('/feed')
 def profile(request,user):
 	user=UserProfile.objects.get(user=User.objects.get(username=user))
-	return render(request,"main/profile.html",context={'user':user})
+	qaits=QAIT.objects.filter(by=user)
+	followers=Following.objects.filter(following=user)
+	following=Following.objects.filter(follower=user)
+	
+	return render(request,"main/profile.html",context={'user':user,'followers':followers,'following':following,'qaits':qaits})
 
 
 def like_dislike(request):

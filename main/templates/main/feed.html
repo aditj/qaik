@@ -18,7 +18,7 @@
     <div class="header">
         <div class="left-half">
             <div id="myprofile">
-                <img src="{% static 'main/fingerprint.svg' %}" width="20px" alt="" srcset="">
+                <img src="{% static 'main/fingerprint.svg' %}" height="40px" alt="" srcset="">
             </div>
             <div id="logo">
                 QAIT
@@ -54,7 +54,8 @@
                 <div class="trend-list">
                     {% for trend in trends %}
                     <div class="trend">
-                        <p>{{trend.title}}
+                        <p>
+                            <a href="/search/{{trend.title}}">{{trend.title}}</a>
                         <sup>
                             {{trend.count}}
                         </sup>
@@ -77,7 +78,7 @@
                                 <img src="{% static 'main/dp.svg' %}" width="40px" alt="" srcset="">
                                 <div>
                                     {{person.user.first_name}} {{person.user.second_name}} <br>
-                                    {{person.user.username}}
+                                   <a href="/profile/{{person.user.username}}">{{person.user.username}}</a> 
                                 </div>
                                 
                             </div>
@@ -126,7 +127,7 @@
                             </div>
                             <div>
                                 <i data-qait-id="{{qait.id}}" class="reply-button fa fas fa-retweet" style="font-size: medium;"></i>
-                                <span data-qait-id="{{qait.id}}" class="reply-count"> <a href="replies/{{qait.id}}">{{qait.get_reply_no}}</a></span>
+                                <span data-qait-id="{{qait.id}}" class="reply-count"> <a href="./replies/{{qait.id}}">{{qait.get_reply_no}}</a></span>
 
                             </div>
                         </div>
@@ -211,7 +212,7 @@
                     csrfmiddlewaretoken:token ,
                 }
             }).done(function(data){
-                $(".reply-count[data-qait-id="+$('#reply-qait').attr("data-qait-id")+"]").html(data)
+                $(".reply-count[data-qait-id=" + $('#reply-qait').attr("data-qait-id") + "]").html(`<a href="./replies/${$('#reply-qait').attr("data-qait-id")}">${data}</a>`)
                 $(".close-modal").click();
             })
         })
