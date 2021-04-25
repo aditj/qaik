@@ -5,18 +5,24 @@
 {% endblock %}
 {% block content %} 
 
-<div class="introduction" style="float:left">
-	<h1>Welcome to the QAIT - Quantum Artificial Intelligence aided Tweeter.</h1>
-	
-	<h1>For using QAIT, please register yourself.</h1>
+<div class="icon">
+	<h1>QAIT</h1>
 </div>
 
-<!--Register--> 
-<div class="container" style="float:left">
-	<h1>Register</h1>
-	<form method="POST">
-		{% csrf_token %}
-		<div class="input-group" >
+<div class= "row">
+
+	<div class="column introduction" style="float:left">
+		<h1>Welcome to the QAIT - Quantum Artificial Intelligence aided Tweeter.</h1>
+		
+		<h1>For using QAIT, please register yourself.</h1>
+	</div>
+	
+	<!--Register--> 
+	<div class="column register" style="float:left">
+		<h1>Register</h1>
+		<form method="POST">
+			{% csrf_token %}
+			<div class="input-group" >
 			<label for="first_name">First Name</label>
 			<input type="text" name="first_name" id="first_name">
 		</div>
@@ -31,32 +37,26 @@
 			<input type="email" name="email" id="email">
 		</div>
 		<div style="clear:both;">&nbsp;</div>
-			<div class="input-group">
-				<label for="username">Username</label>
-				<input type="text" name="username" id="username">
-			</div>
-			<div style="clear:both;">&nbsp;</div>
-			<div class="input-group">
-				<label for="password">Password</label>
-				<input type="password" name="password" id="password">
-			</div>
-			
-			<div style="clear:both;">&nbsp;</div>
+		<div class="input-group">
+			<label for="username">Username</label>
+			<input type="text" name="username" id="username">
+		</div>
+		<div style="clear:both;">&nbsp;</div>
+		<div class="input-group">
+			<label for="password">Password</label>
+			<input type="password" name="password" id="password">
+		</div>
 		
-			
-			
+		<div style="clear:both;">&nbsp;</div>
 		
 		<button type="submit">Register</button>
 			
-
 		</form>
-    
 
-	<p class="text-center">If you already have an account, <a href="/login">login</a> instead.</p>
+		<p class="text-center">If you already have an account, <a href="/login">login</a> instead.</p>
+	</div>
 </div>
 
-<div class="icon">
-	<h1>QAIT</h1>
-</div>
+
 
 {% endblock %}

@@ -147,14 +147,20 @@ sup{
 }
 
 .fa:hover {
-    color: rgb(204, 204, 204);
+    color: #aea4e9;
 }
 
 .like{
     font-size: 50px;
-    color:#a293f7;
-
+    color:#aea4e9;
 }
+
+.like-count{
+    margin-right: 10px;
+  
+}
+
+
 /* Modal */
 .modal {
     display: none; /* Hidden by default */
