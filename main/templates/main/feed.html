@@ -21,7 +21,7 @@
                 <img src="{% static 'main/fingerprint.svg' %}" height="40px" alt="" srcset="">
             </div>
             <div id="logo">
-                QAIT
+                QAIT.
             </div>
             
         </div>
@@ -55,7 +55,7 @@
                     {% for trend in trends %}
                     <div class="trend">
                         <p>
-                            <a href="/search/{{trend.title}}">{{trend.title}}</a>
+                            #<a href="/search/{{trend.title}}">{{trend.title}}</a>
                         <sup>
                             {{trend.count}}
                         </sup>
@@ -78,13 +78,21 @@
                                 <img src="{% static 'main/dp.svg' %}" width="40px" alt="" srcset="">
                                 <div>
                                     {{person.user.first_name}} {{person.user.second_name}} <br>
-                                   <a href="/profile/{{person.user.username}}">{{person.user.username}}</a> 
+                                   <a href="/profile/{{person.user.username}}">@{{person.user.username}}</a> 
                                 </div>
                                 
                             </div>
+                            {% if request.user.username in person.get_followers %}
                             <div class="follow-button">
-                                <i data-person-id="{{person.id}}" class="follow-person fa fas fa-plus-circle"></i>
-                            </div>
+                                        <i data-person-id="{{person.id}}" class="follow-person fa fas fa-check-circle"></i>
+                                    </div>
+                            
+                            {% else %}
+        
+                            <div class="follow-button">
+                                        <i data-person-id="{{person.id}}" class="follow-person fa fas fa-plus-circle"></i>
+                                    </div>
+        {% endif %}
                             
                         </div>
                         <div class="bio">
@@ -111,9 +119,21 @@
                     <div class = "qaits-list" >
                         <div class = "qaits">
 
-                            <div style="text-align: left; font-size: medium; ">
-                                @{{qait.by.user.username}} <p style="font-weight: 100; font-size: small; color: rgb(209, 219, 219);">{{ qait.date }} &middot; {{qait.time}}</p>
-                                </p>
+                            <div class="qait-header">
+                                
+                                <div class="profile-card-username">
+                                    <img src="{% static 'main/dp-white.svg' %}" width="40px" alt="" srcset="">
+                                    <div>
+                                        {{qait.by.user.first_name}}
+                                    {{qait.by.user.last_name}} <br>
+                                      <a href="/profile/{{person.user.username}}"> <mono>@{{qait.by.user.username}} </mono></a> 
+                                    </div>
+                                    
+                                </div>
+                                
+                                
+                                <div style="font-weight: 100; font-size: small; color: rgb(255 255 255);">{{ qait.date }} &middot; {{qait.time}}</p>
+                                </div>
                                 
                             </div>
                             <p style="margin-bottom: 1%;">
@@ -122,14 +142,14 @@
 
                             <div style = "text-align: right; padding: 3%;">
                             
-                                        <i data-qait-id="{{qait.id}}" class="like-button fa fas fa-heart" style="font-size: medium;"></i>
-                                  <span class="like-count"> {{qait.get_like_no}}</span>
-                            </div>
-                            <div>
-                                <i data-qait-id="{{qait.id}}" class="reply-button fa fas fa-retweet" style="font-size: medium;"></i>
-                                <span data-qait-id="{{qait.id}}" class="reply-count"> <a href="/replies/{{qait.id}}">{{qait.get_reply_no}}</a></span>
+                                <i data-qait-id="{{qait.id}}" class="like-button fa fas fa-heart"></i>
+                                <span class="like-count"> {{qait.get_like_no}}</span>
 
+                                <i data-qait-id="{{qait.id}}" class="reply-button fa fas fa-retweet"></i>
+                                <span data-qait-id="{{qait.id}}" class="reply-count"> <a href="/replies/{{qait.id}}">{{qait.get_reply_no}}</a></span>
+                                
                             </div>
+                            
                         </div>
                         <br>
                     </div>
@@ -140,7 +160,7 @@
     </div>
     <div class="footer">
         <div class="logout">
-            <a href="/logout">logout.</a>
+            <a href="/logout">logout</a>
         </div>
         
     </div>
@@ -157,10 +177,12 @@
       <h2>Reply to QAIT</h2>
     </div>
     <div class="modal-body qaits-list" id="reply-container">
-      
+      <div >
+
+      </div>
     </div>
     <div class="modal-footer">
-
+        
       <input data-qait-id="" id="reply-qait" type="text">
       <button id="reply-button">Reply</button>
     </div>
@@ -195,10 +217,8 @@
             var modal = document.getElementById("reply-modal");
             var span = document.getElementsByClassName("close")[0];
             modal.style.display = "block";
-            $('#reply-qait').attr("data-qait-id",$(this).attr("data-qait-id"))
-            $("#reply-container").html($(this).parent().parent().html())
-
-            
+            $('#reply-qait').attr("data-qait-id",$(this).attr("data-qait-id"));
+            $("#reply-container").html($(this).parent().parent().parent().html());     
         })
         $("#reply-button").click(function(){
             token = "{{ csrf_token }}"
@@ -207,7 +227,7 @@
                 method:'POST',
                 data:{
                     reply_by:"{{request.user.username}}",
-                    reply_to:$('#reply-qait').attr("data-qait-id"),
+                    reply_to:$("#reply-qait").attr("data-qait-id"),
                     content:$("#reply-qait").val(),
                     csrfmiddlewaretoken:token ,
                 }

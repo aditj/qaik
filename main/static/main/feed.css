@@ -1,29 +1,47 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300&family=DM+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@600&display=swap');
+
+:root {
+    
+    --bg: #ffffff;
+    --fg: #e24e42;
+    --text: #23374dde;
+  }
+
+  ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: var(--bg);
+    opacity: 1; /* Firefox */
+  }
 *{
     font-family: 'DM Sans', sans-serif;
-    color: white;
+    color: var(--text);
 }
 .black{
     color:black;
 }
 button{
     color: black;
+    background-color: var(--fg);
     font-family: 'DM Mono',monospace;
 }
 body{
-    background-color: #6554C0;
+    background-color: var(--bg);
 }
 .header{
-    width: 100%;
+    
     display: flex;
     justify-content: space-between;
     width: 80%;
     margin: auto;
 }
+
 .header .left-half{
 display: flex;
 
+
+
 }
+
 .header .left-half>div{
     margin: auto;
     
@@ -32,22 +50,33 @@ display: flex;
         padding-right: 20px;
 
     }
+    .header .left-half #myprofile img{
+        color: var(--fg);
+    }
     .header #logo{
         font-size: 30px;
+        font-family: 'Quicksand';
     }
 .header .right-half{
-width: 45%;
+width: 65%;
+}
+mono{
+    font-family: 'DM Mono';
+    font-size: smaller;
 }
 input,#new-qait-button{
     font-family:'DM Mono',monospace;
-    color: black;
+        color: white;
+    border: none;
+    border-radius: 6px;
 }
 #searchbar{
     padding: 10px;
-    width: 100%;
-    background: #F4F8FB;
+    width: 85%;
+    margin-left: 5%;
+    background: var(--fg);
     border: none;
-
+    font-family: 'DM Mono';
     box-sizing: border-box;
     border-radius: 13px 0px 0px 13px;
 }
@@ -62,6 +91,8 @@ input,#new-qait-button{
 .content .right-half{
     width: 65%;
     margin: auto;
+    margin-left: 5%;
+
 }
 .content>div{
     width: 100%;
@@ -82,7 +113,7 @@ input,#new-qait-button{
     width: 80%;
     height: 2em;
     border: none;
-    border-bottom: 1px white dashed;
+    border-bottom: 1px var(--text) dashed;
     /* -webkit-tap-highlight-color: rgba(0, 0, 0, 0); */
 }
 #new-qait:focus{
@@ -100,7 +131,7 @@ input:focus,textarea:focus{
 .search-bar-container img{
     border: none;
     width: 18px;
-    background: #F4F8FB;
+    background: var(--fg);
     border-radius: 0px 13px 13px 0px;
     padding: 5px;
 }
@@ -134,12 +165,15 @@ sup{
 }
 .qaits{
     padding: 1%;
-    background-color: #5c4ead;
+    background-color: var(--fg);
+    color:var(--bg);
     width: 85%;
     border-radius: 0.2cm;
     margin: auto;
 }
-
+.qaits *{
+    color:var(--bg);
+}
 .fa {
     font-size: 50px;
     cursor: pointer;
@@ -183,7 +217,7 @@ sup{
   .modal-content {
     position: fixed;
     bottom: 0;
-    background-color: #5c4ead;
+    background-color: var(--bg);
     width: 100%;
     -webkit-animation-name: slideIn;
     -webkit-animation-duration: 0.4s;
@@ -208,16 +242,18 @@ sup{
   
   .modal-header {
     padding: 2px 16px;
-    background-color: #5c4ead;
-    color: white;
+    background-color: var(--bg);
+    color: var(--text);
   }
   
   .modal-body {padding: 2px 16px;}
   
   .modal-footer {
     padding: 2px 16px;
-    background-color: #5c4ead;
-    color: white;
+    background-color: var(--bg);
+    color: var(--text);
+    margin: auto;
+    text-align: center;
   }
   
   /* Add Animation */
@@ -261,4 +297,30 @@ sup{
   ::-webkit-scrollbar-thumb:hover {
       cursor: pointer;
     background: gray; 
+  }
+  .qait-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+  }
+  .qait-header>div:nth-child(2){
+      font-family: 'DM Mono';
+      font-size: small;
+  }
+  #reply-qait{
+    width: 50%;
+    height: 1.8em;
+    border-radius: 3px;
+    background-color: var(--fg);
+    color: white;
+    margin: auto;
+  }
+  #reply-button{
+    border: none;
+    width: 10%;
+    height: 1.8em;
+    font-size: smaller;
+    color: white;
+
   }

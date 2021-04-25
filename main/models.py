@@ -7,7 +7,12 @@ class UserProfile(models.Model):
     bio=models.TextField(blank=True,default='')
     dob=models.DateField(blank=True,null=True)
     perc_objectionble=models.FloatField(default=0)
-
+    def get_followers(self):
+        followers=Following.objects.filter(following=self)
+        output=[]
+        for f in followers:
+            output.append(f.follower.user.username)
+        return output
 class QAIT(models.Model):
     content=models.CharField(max_length=140)
     by=models.ForeignKey(UserProfile,on_delete=models.CASCADE)

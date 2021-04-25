@@ -14,8 +14,8 @@ from django.db.models import Exists, OuterRef
 @login_required
 def feed(request):
 	trends=Hashtag.objects.all()
-	qaits = QAIT.objects.all()
-	people=UserProfile.objects.all()
+	qaits = QAIT.objects.order_by('-date','-time')[:100]
+	people=UserProfile.objects.order_by('?')[:5]
 	return render(request,"main/feed.html",context={
 		'feed_title':'Feed',
 		'trends':trends,
@@ -104,8 +104,8 @@ def reply(request):
 def see_replies(request,qait_id):
 	q=QAIT.objects.get(id=qait_id)
 	trends=Hashtag.objects.all()
-	qaits = QAIT.objects.all()
-	people=UserProfile.objects.all()
+	qaits = Reply.objects.filter(reply_to=q)
+	people=UserProfile.objects.order_by('?')[:5]
 	return render(request,"main/feed.html",context={
 		'feed_title':'Feed',
 		'trends':trends,
@@ -124,7 +124,7 @@ def create_following(request):
 def search(request,query):
 	qaits=QAIT.objects.filter(content__contains=query)
 	trends=Hashtag.objects.all()
-	people=UserProfile.objects.all()
+	people=UserProfile.objects.order_by('?')[:5]
 	return render(request,"main/feed.html",context={
 		'feed_title':'Search Results',
 		'trends':trends,
