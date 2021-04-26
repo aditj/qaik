@@ -5,6 +5,7 @@ from . import views
 urlpatterns = [
 path('feed',views.feed),
 path('login',views.login_view),
+path('',views.register),
 path('register',views.register),
 path('logout',views.logout_view),
 path('create_qait',views.create_qait),
@@ -14,5 +15,6 @@ path('reply',views.reply),
 path('replies/<int:qait_id>',views.see_replies),
 path('follow',views.create_following),
 path('search/<str:query>',views.search),
+path('init_graph',views.initialize_graph),
 
 ]

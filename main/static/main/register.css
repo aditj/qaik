@@ -6,7 +6,7 @@
 }
 
 body{
-    margin-top: 3%;
+
     margin-left: 10%;
     margin-right: 10%;
     align-self: center;
@@ -44,12 +44,14 @@ a{
 }
 .register{
     /* margin-right: 5%; */
+    margin: auto;
     margin-left: 10%;
     text-align: center;
     /* border: 0.5px solid #D65D5D; */
     border-radius: 20px;
     background: #D65D5D;
     color: white;
+    height: fit-content;
 }
 
 
@@ -80,6 +82,8 @@ button{
 }
 button:hover{
     cursor: pointer;
+    background-color: #297BCA;
+    color: #ffffff;
 }
 
 
@@ -109,4 +113,22 @@ button:hover{
     background: #297BCA;
     color: rgba(37, 207, 219, 0.568);
 
+}
+#bro{
+    width: 100%;
+}
+#regchar{
+    display: none;
+}
+@media only screen and (min-width: 1400px) {
+    #regchar{
+        display: block;
+        position: fixed;
+        top: 147px;
+
+    
+        left: 42%;
+        /* height: 650px; */
+        width: 12%;
+    }
 }

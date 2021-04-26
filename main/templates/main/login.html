@@ -14,13 +14,13 @@
 <div class="row">
 
 	<div class="column introduction" style="float:left">
-		<h1>Welcome to the QAIT - Quantum Artificial Intelligence aided Microblogging.</h1>
+	<img id="bro" src="{% static 'main/bro.svg' %}">
 	
 	</div>
 	
 	<!--Register--> 
 	<div class="column register" style="float:left">
-		<h1>Login</h1>
+		<h3>Login to your QAIT Account securely.</h3>
 		<form method="POST">
 			{% csrf_token %}
 			<div class="input-group">

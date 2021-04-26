@@ -115,6 +115,46 @@
                     {{feed_title}}
                 </h2>
                 <div>
+                    {% if parent_qait %}
+                    <div class = "qaits-list" >
+                        <div class = "qaits">
+
+                            <div class="qait-header">
+                                
+                                <div class="profile-card-username">
+                                    <img src="{% static 'main/dp-white.svg' %}" width="40px" alt="" srcset="">
+                                    <div>
+                                        {{parent_qait.by.user.first_name}}
+                                    {{parent_qait.by.user.last_name}} <br>
+                                      <a href="/profile/{{person.user.username}}"> <mono>@{{parent_qait.by.user.username}} </mono></a> 
+                                    </div>
+                                    
+                                </div>
+                                
+                                
+                                <div style="font-weight: 100; font-size: small; color: rgb(255 255 255);">{{ parent_qait.date }} &middot; {{parent_qait.time}}</p>
+                                </div>
+                                
+                            </div>
+                            <p style="margin-bottom: 1%;">
+                                {{parent_qait.content}}
+                            </p>
+
+                            <div style = "text-align: right; padding: 3%;">
+                            
+                                <i data-qait-id="{{parent_qait.id}}" class="like-button fa fas fa-heart"></i>
+                                <span class="like-count"> {{parent_qait.get_like_no}}</span>
+
+                                <i data-qait-id="{{parent_qait.id}}" class="reply-button fa fas fa-retweet"></i>
+                                <span data-qait-id="{{parent_qait.id}}" class="reply-count"> <a href="/replies/{{parent_qait.id}}">{{parent_qait.get_reply_no}}</a></span>
+                                
+                            </div>
+                            
+                        </div>
+                        <br>
+                    </div>
+                    <h2>Replies:</h2>
+                    {% endif %}
                     {% for qait in qaits %}
                     <div class = "qaits-list" >
                         <div class = "qaits">

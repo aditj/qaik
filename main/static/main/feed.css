@@ -64,11 +64,31 @@ mono{
     font-family: 'DM Mono';
     font-size: smaller;
 }
-input,#new-qait-button{
+input{
     font-family:'DM Mono',monospace;
         color: white;
     border: none;
     border-radius: 6px;
+}
+form{
+    text-align: right;
+}
+#new-qait-button{
+    font-family:'DM Mono',monospace;
+    color: white;
+    border: none;
+    width: 45%;
+    margin: auto;
+    height: 2.1em;
+    margin-top: 10px;
+    border-radius: 6px;
+
+}
+button:hover{
+    cursor: pointer;
+    color: var(--fg)!important;
+    background-color: white!important;
+    border: 1px solid black!important;
 }
 #searchbar{
     padding: 10px;
@@ -108,16 +128,16 @@ input,#new-qait-button{
     max-height: 60vh;
 }
 #new-qait {
-    color: white;
+    color: black;
     background: none;
-    width: 80%;
+    width: 100%;
     height: 2em;
     border: none;
-    border-bottom: 1px var(--text) dashed;
+    border-bottom: 2px var(--text) dashed;
     /* -webkit-tap-highlight-color: rgba(0, 0, 0, 0); */
 }
 #new-qait:focus{
-    border-bottom: 2px white dashed;
+    border-bottom: 3px black dashed;
 }
 button{
     cursor: pointer;
